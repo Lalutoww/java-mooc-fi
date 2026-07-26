@@ -13,5 +13,22 @@ public class IsItInTheFile {
         System.out.println("Search for:");
         String searchedFor = scanner.nextLine();
 
+        boolean isFound = false;
+
+        try ( Scanner sc = new Scanner(Paths.get(file))) {
+
+            while (sc.hasNextLine()) {
+                if (sc.nextLine().equals(searchedFor)) {
+                    System.out.println("Found!");
+                    isFound = true;
+                }
+            }
+            if (!isFound) {
+                System.out.println("Not found!");
+            }
+        } catch (Exception e) {
+            System.out.println("Reading the file " + file + " failed.");
+        }
+
     }
 }
